@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <math.h>
+
+int main () {
+
+// Find matrix size
+double sigma = 0.5;
+
+int N = sigma*10;
+// N should always be odd
+if(N % 2 == 0){
+	matrix_size++;
+}
+
+double kernel[N][N];
+
+for(int i =0; i<N; i++){
+	for(int j=0; j<N ; j++){
+		kernel [i][j] = (1.0 /(2.0 *PI *sq(sigma))) * exp ( -(sq(i) + sq(j) ) / (2 * sq(sigma)));
+		printf("%lf\n",kernel[i][j]);
+	}
+}
+
+
+
+
+}

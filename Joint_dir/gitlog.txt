@@ -1,0 +1,83 @@
+commit 6524c50f398910e3133dd6254784ea5838a5f6c1
+Author: Asridh <asridha7@jh.edu>
+Date:   Thu Mar 14 21:36:33 2024 -0400
+
+    Updated Makefile
+
+commit d006a0fbee5107e18137fa7152b2400c749ed3bb
+Author: Asridh <asridha7@jh.edu>
+Date:   Thu Mar 14 21:27:26 2024 -0400
+
+    First submission
+
+commit d7dc6e0a9382966db079d620501d9f1863742131
+Author: Asridh <asridha7@jh.edu>
+Date:   Thu Mar 14 21:20:40 2024 -0400
+
+    Added project_with_error_check
+
+commit 5410fec0c7865b350fac962fa0b75ec3ab2864a9
+Author: Asridh <asridha7@jh.edu>
+Date:   Thu Mar 14 21:19:55 2024 -0400
+
+    Updated join_with_error_check
+
+commit 1d5f1bcdf3236fe15502322e63813d7d2550ce52
+Author: Asridh <157536882+Asridh@users.noreply.github.com>
+Date:   Thu Mar 14 21:16:42 2024 -0400
+
+    Add files via upload
+
+commit f5e22b9b773f6d570884e63bd10bd9d94dba963a
+Author: jalilrezek <157626361+jalilrezek@users.noreply.github.com>
+Date:   Thu Mar 14 20:56:13 2024 -0400
+
+    Create project.c 9pm March 14
+    
+    not sure if all edge cases accounted for, testing isRealNumber and isInteger works for blur and saturate's number input
+
+commit 3948084fd64b8e380a975c1ae342d417357378ea
+Author: Asridh <asridha7@jh.edu>
+Date:   Thu Mar 14 19:29:35 2024 -0400
+
+    Restructured_Amit_dir
+
+commit a7fba2a040eeeeb2b2502f48025505e7f5285d66
+Author: Asridh <asridha7@jh.edu>
+Date:   Thu Mar 14 19:28:44 2024 -0400
+
+    Restructured Amit_dir
+
+commit a37f8bebd7ada6c144f7d40aa1a3fc65eec621a4
+Author: Asridh <asridha7@jh.edu>
+Date:   Thu Mar 14 19:26:37 2024 -0400
+
+    All working functions
+
+commit 7ca873810042bbc7f82f6bb2115f242d873d09e0
+Author: Asridh <asridha7@jh.edu>
+Date:   Thu Mar 14 16:32:15 2024 -0400
+
+    Updated file structure
+
+commit d5b10bc0ea406b8a740acdef7b7ee141fb3b97bd
+Author: jalilrezek <157626361+jalilrezek@users.noreply.github.com>
+Date:   Thu Mar 14 06:28:45 2024 -0400
+
+    Create ThuMar14 Initial UI (project.c)
+    
+    Initial attempt at putting together the UI side of things. blend() has yet to be implemented. All error codes were fit in in a somewhat reasonable way - but whether they are used correctly and this handles all edge cases, I'm not sure.
+
+commit 8f5bdd7ed70674d7579407c51d22a01e72bbf1e0
+Author: jalilrezek <157626361+jalilrezek@users.noreply.github.com>
+Date:   Wed Mar 13 12:20:39 2024 -0400
+
+    Create saturate, rotate, grayscale
+
+commit ce5669cfd7294119a53117995cdbb53a6b19f645
+Author: jalilrezek <157626361+jalilrezek@users.noreply.github.com>
+Date:   Mon Mar 11 12:38:24 2024 -0400
+
+    Create MonMar11
+    
+    Saturate, grayscale, and rotate match the test files

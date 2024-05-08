@@ -1,0 +1,40 @@
+Format: statement
+    tested inputs
+
+Invalid number of args: No valgrind errors
+
+Invalid filename: No valgrind errors   
+    ./project hey output grayscale
+
+Unsupported operation: No valgrind errors 
+    ./project kitten.ppm gray grayScale
+
+Within Grayscale: 1 extra argument at the end, no valgrind errors
+    valgrind --leak-check=full --show-leak-kinds=all ./project kitten.ppm output grayscale 5
+
+Extra arguments not at the end: No valgrind errors
+    valgrind --leak-check=full --show-leak-kinds=all ./project kitten.ppm EXTRA output grayscale
+
+Within Grayscale: invalid ppm, but a valid file, fed into ppm (argv[1]): No valgrind errors
+    valgrind --leak-check=full --show-leak-kinds=all ./project gitlog.txt output grayscale
+
+Grayscale normal execution: No errors 
+
+rotate-ccw() looks about the same as Grayscale logically, so I did not test it.
+
+Within Saturate: Too many arguments; also, the one that should be the saturation value is invalid, but will pick up too many arguments problem first.
+    valgrind --leak-check=full --show-leak-kinds=all ./project kitten.ppm output saturate abc 3.0
+
+Within Saturate: Everything good except scale factor is invalid --> no errors. Displayed correct error code 6 message.
+    valgrind --leak-check=full --show-leak-kinds=all ./project kitten.ppm output saturate a
+
+Within Blend: Everything good except second file is not present (null). No valgrind errors. Displayed correct error code 2 message
+    valgrind --leak-check=full --show-leak-kinds=all ./project kitten.ppm tree blend outputName 4
+
+Within blend: Nothing wrong except invalid alpha value. No valgrind errors and reported correct error code 6 message
+    valgrind --leak-check=full --show-leak-kinds=all ./project kitten.ppm trees.ppm  blend outputName . // failed as expected
+    valgrind --leak-check=full --show-leak-kinds=all ./project kitten.ppm trees.ppm  blend outputName a // failed as expected
+    valgrind --leak-check=full --show-leak-kinds=all ./project kitten.ppm trees.ppm blend output .4 // succeeded as expected
+    valgrind --leak-check=full --show-leak-kinds=all ./project kitten.ppm trees.ppm blend output 4. // succeeded as expected
+
+

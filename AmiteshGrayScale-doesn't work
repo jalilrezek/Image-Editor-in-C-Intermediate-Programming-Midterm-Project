@@ -1,0 +1,13 @@
+Image grayscale (const Image in){
+	float gray = 0.0;
+	Image gray_image = make_image(in.rows, in.cols);
+
+	for(int i = 0; i < (in.rows*in.cols); i++){
+		gray = 0.3 * in.data[i].r + 0.59 * in.data[i].g + 0.11 * in.data[i].b;
+	 	gray_image.data[i].r = (unsigned char)gray;
+		gray_image.data[i].g = (unsigned char)gray;
+	 	gray_image.data[i].b = (unsigned char)gray;
+  	}
+  
+  	return gray_image;
+}

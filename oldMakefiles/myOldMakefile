@@ -1,0 +1,22 @@
+CC=gcc
+CFLAGS=-std=c99 -pedantic -Wall -Wextra -lm
+KITTEN_IMG=/home/ips24042/myrepo220/CS220/projects/midterm/data/kitten.ppm
+TREES_IMG=/home/ips24042/myrepo220/CS220/projects/midterm/data/trees.ppm
+
+
+project: project.o
+	$(CC) $(CFLAGS) -o project project.o ppm_io.o image_manip.o
+
+project.o: project.c ppm_io.h image_manip.h
+	$(CC) $(CFLAGS) -c project.c
+
+image_manip.o: image_manip.c image_manip.h 
+	$(CC) $(CFLAGS) -c image_manip.c
+
+ppm_io.o: ppm_io.c ppm_io.h
+	$(CC) $(CFLAGS) -c ppm_io.c
+
+# Removes all object files and the executable named main,
+# so we can start fresh
+clean:
+	rm -f *.o project

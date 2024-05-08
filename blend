@@ -1,0 +1,177 @@
+Image blend (const Image in1, const Image in2 ,double alpha) {
+	// Find max image dimenstions
+	int max_col = (in1.cols>=in2.cols) ? in1.cols : in2.cols;
+	int max_row = (in1.rows>=in2.rows) ? in1.rows : in2.rows;
+	int min_row = (in1.rows<in2.rows) ? in1.rows : in2.rows;
+	int min_col = (in1.cols<in2.cols) ? in1.cols : in2.cols;
+	Image blend = make_image(max_row,max_col);
+
+	// Considering all cases
+	int IMAGE_ONE_MORE_ROWS = (in1.rows>in2.rows);
+	int IMAGE_TWO_MORE_ROWS = (in1.rows<in2.rows);
+	int IMAGE_ONE_MORE_COLS = (in1.cols>in2.cols);
+	int IMAGE_TWO_MORE_COLS = (in1.cols<in2.cols);
+	int IMAGE_EQUAL_ROWS = (in1.rows == in2.rows);
+	int IMAGE_EQUAL_COLS = (in1.cols == in2.cols);
+	
+
+	int next_col = 0;
+	int next_row = 0;
+	int k = 0;
+	double blended_rpix_in1 = 0;
+	double blended_rpix_in2 = 0;
+	
+	double blended_gpix_in1 = 0;
+	double blended_gpix_in2 = 0;
+	
+	double blended_bpix_in1 = 0;
+	double blended_bpix_in2 = 0;
+
+	//--------------------------------------------------//
+	// Image 1 has more rows but image 2 has more cols
+	if(IMAGE_ONE_MORE_ROWS && IMAGE_TWO_MORE_COLS){
+		// Fill extended col portion
+		printf("Should not be here also");
+		for(int i = 0; i<min_row;i++){
+			for(int j = min_col; j<max_col; j++){
+				blend.data[j+next_col] = in2.data[j+next_col];
+			}
+			next_col += max_col;
+		}
+		next_col = min_row * (min_col-1);
+		// Fill the extended row portion
+		for(int i = min_row; i<max_row; i++){
+			for(int j = 0; j<min_col ; j++){
+				blend.data[next_col+j] = in1.data[j+next_col];
+			}
+			next_col += min_col;
+		}
+		// Blend the images
+		for(int i = 0; i<min_row; i++){
+			for(int j = 0; j<min_col; j++){
+				blended_rpix_in1 = in1.data[k].r * alpha;
+				blended_gpix_in1 = in1.data[k].g * alpha;
+				blended_bpix_in1 = in1.data[k].b * alpha;
+				blended_rpix_in2 = in2.data[j+next_row].r * (1-alpha);
+				blended_gpix_in2 = in2.data[j+next_row].g * (1-alpha);
+				blended_bpix_in2 = in2.data[j+next_row].b * (1-alpha);
+				blend.data[j+next_row].r =  blended_rpix_in1 + blended_rpix_in2;
+				blend.data[j+next_row].g =  blended_gpix_in1 + blended_gpix_in2;
+				blend.data[j+next_row].b =  blended_bpix_in1 + blended_bpix_in2;
+				k++;
+			}
+			next_row += max_col;
+		}
+	}
+	//--------------------------------------------------//
+	
+	// Image 1 has more cols but image tow has more rows
+	// Bottom corner of the image will be black
+	if(IMAGE_ONE_MORE_COLS && IMAGE_TWO_MORE_ROWS){
+		// Fill extended col portion
+		for(int i = 0; i<min_row;i++){
+			for(int j = min_col; j<max_col; j++){
+				blend.data[j+next_col] = in1.data[j+next_col];
+			}
+			next_col += max_col;
+		}
+		next_col = min_row * (min_col-1);
+		// Fill the extended row portion
+		for(int i = min_row; i<max_row; i++){
+			for(int j = 0; j<min_col ; j++){
+				blend.data[next_col+j] = in2.data[j+next_col];
+			}
+			next_col += min_col;
+		}
+		// Blend the images	
+		for(int i = 0; i<min_row; i++){
+			for(int j = 0; j<min_col; j++){
+				blended_rpix_in1 = in1.data[k].r * alpha;
+				blended_gpix_in1 = in1.data[k].g * alpha;
+				blended_bpix_in1 = in1.data[k].b * alpha;
+				blended_rpix_in2 = in2.data[j+next_row].r * (1-alpha);
+				blended_gpix_in2 = in2.data[j+next_row].g * (1-alpha);
+				blended_bpix_in2 = in2.data[j+next_row].b * (1-alpha);
+				blend.data[j+next_row].r = blended_rpix_in1 + blended_rpix_in2;
+				blend.data[j+next_row].g =  blended_gpix_in1 + blended_gpix_in2;
+				blend.data[j+next_row].b = blended_bpix_in1 + blended_bpix_in2;
+				k++;
+			}
+			next_row += max_col;
+		}
+	}
+	//--------------------------------------------------//
+	// Image 1 is larger
+	if( (IMAGE_ONE_MORE_COLS && IMAGE_ONE_MORE_ROWS) || (IMAGE_ONE_MORE_ROWS && IMAGE_EQUAL_COLS) || (IMAGE_ONE_MORE_COLS && IMAGE_EQUAL_ROWS) ){
+		for(int i = 0; i<max_row; i++){
+			for(int j = 0; j<max_col; j++){
+				blend.data[k] = in1.data[k];
+				k++;
+			}
+		}	
+		k = 0;
+		for(int i = 0; i<min_row; i++){
+			for(int j = 0; j<min_col; j++){
+				blended_rpix_in2 = in2.data[k].r * alpha;
+				blended_gpix_in2 = in2.data[k].g * alpha;
+				blended_bpix_in2 = in2.data[k].b * alpha;
+				blended_rpix_in1 = in1.data[j+next_row].r * (1-alpha);
+				blended_gpix_in1 = in1.data[j+next_row].g * (1-alpha);
+				blended_bpix_in1 = in1.data[j+next_row].b * (1-alpha);
+				blend.data[j+next_row].r = blended_rpix_in1 + blended_rpix_in2;
+				blend.data[j+next_row].g = blended_gpix_in1 + blended_gpix_in2;
+				blend.data[j+next_row].b = blended_bpix_in1 + blended_bpix_in2;
+				k++;
+			}
+			next_row += max_col;
+		}
+	}
+	//--------------------------------------------------//
+	// Image 2 is larger
+	if((IMAGE_TWO_MORE_ROWS && IMAGE_TWO_MORE_COLS) || (IMAGE_TWO_MORE_ROWS && IMAGE_EQUAL_COLS) || (IMAGE_TWO_MORE_COLS && IMAGE_EQUAL_ROWS)){
+		for(int i = 0; i<max_row; i++){
+			for(int j = 0; j<max_col; j++){
+				blend.data[k] = in2.data[k];
+				k++;
+			}
+		}	
+		k = 0;
+		for(int i = 0; i<min_row; i++){
+			for(int j = 0; j<min_col; j++){
+				blended_rpix_in1 = in1.data[k].r * alpha;
+				blended_gpix_in1 = in1.data[k].g * alpha;
+				blended_bpix_in1 = in1.data[k].b * alpha;
+				blended_rpix_in2 = in2.data[j+next_row].r * (1-alpha);
+				blended_gpix_in2 = in2.data[j+next_row].g * (1-alpha);
+				blended_bpix_in2 = in2.data[j+next_row].b * (1-alpha);
+				blend.data[j+next_row].r = blended_rpix_in1 + blended_rpix_in2;
+				blend.data[j+next_row].g = blended_gpix_in1 + blended_gpix_in2;
+				blend.data[j+next_row].b = blended_bpix_in1 + blended_bpix_in2;
+				k++;
+			}
+			next_row += max_col;
+		}
+	}
+	
+	//--------------------------------------------------//
+	// If image sizes are equal
+	if(IMAGE_EQUAL_ROWS && IMAGE_EQUAL_COLS){
+		for(int i = 0; i<max_row; i++){
+			for(int j = 0; j<max_col; j++){
+				blended_rpix_in1 = in1.data[k].r * alpha;
+				blended_gpix_in1 = in1.data[k].g * alpha;
+				blended_bpix_in1 = in1.data[k].b * alpha;
+				blended_rpix_in2 = in2.data[k].r * (1-alpha);
+				blended_gpix_in2 = in2.data[k].g * (1-alpha);
+				blended_bpix_in2 = in2.data[k].b * (1-alpha);
+				blend.data[k].r = blended_rpix_in1 + blended_rpix_in2;
+				blend.data[k].g = blended_gpix_in1 + blended_gpix_in2;
+				blend.data[k].b = blended_bpix_in1 + blended_bpix_in2;
+				k++;
+			}
+		}
+	}		
+	//--------------------------------------------------//
+	return blend;
+
+}

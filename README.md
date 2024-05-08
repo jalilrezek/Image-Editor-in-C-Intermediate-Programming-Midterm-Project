@@ -1,1 +1,0 @@
-# Image-Editor-in-C-Intermediate-Programming-Midterm-Project
