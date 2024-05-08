@@ -1,8 +1,38 @@
 Team member 1:
-Amitesh Sridharan
-asridha7
-
-Team member 2:
 Jalil Rezek
 jrezek1
 345C97
+
+
+Team member 2:
+Amitesh Sridharan
+asridha7
+
+//////////////// IMPORTANT FILES ////////////////////
+
+Please see the "Joint_dir" folder for our finalized work.
+
+image_manip.c contains the image manipulation functions (blur, rotate, grayscale, saturate, blend, pointilism).
+
+project.c contains the main() function and supports use of the tools.
+
+//////////////// PROJECT OVERVIEW /////////////////////
+
+This project support a tool capable of editing images in six ways: Blur, rotate, grayscale, saturate, blend, and pointilism.
+The user supplies an image file in ppm format. 
+
+Blur() applies a Gaussian convolution, and is the most complex of 
+all the functions. 
+
+Saturate() allows the user to choose a degree by which to intensify or dampen the color in the image.
+
+Blend() overlays two images where they overlap, with the user able to specify the emphasis on each image in the overlap.
+
+Grayscale() is analogous to saturate, but with input value of zero, i.e. no color (full dampening).
+
+Pointilism applies the artistic effect of the same name based on random number generation, interspersing the image with black
+dots of randomized size.
+
+Rotate() rotates the image by 90 degrees counterclockwise. Multiple rotations allow rotations 180 and 270 degrees counterclockwise.
+
+
