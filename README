@@ -18,7 +18,7 @@ project.c contains the main() function and supports use of the tools.
 
 //////////////// PROJECT OVERVIEW /////////////////////
 
-The project uses the C programming language.
+The project uses the C programming language. Memory is handled properly; there are no leaks. Further, all functions work as specified.
 
 This project support a tool capable of editing images in six ways: Blur, rotate, grayscale, saturate, blend, and pointilism.
 The user supplies an image file in ppm format. 
@@ -36,5 +36,7 @@ Pointilism applies the artistic effect of the same name based on random number g
 dots of randomized size.
 
 Rotate() rotates the image by 90 degrees counterclockwise. Multiple rotations allow rotations 180 and 270 degrees counterclockwise.
+
+
 
 
