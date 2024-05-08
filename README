@@ -18,6 +18,8 @@ project.c contains the main() function and supports use of the tools.
 
 //////////////// PROJECT OVERVIEW /////////////////////
 
+The project uses the C programming language.
+
 This project support a tool capable of editing images in six ways: Blur, rotate, grayscale, saturate, blend, and pointilism.
 The user supplies an image file in ppm format. 
 
